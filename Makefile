@@ -32,8 +32,8 @@ TITLE		=	'\033[38;5;33m'
 SRC = srcs/
 DCF = srcs/docker-compose.yml
 ENV = srcs/.env
-COMPOSE = docker-compose
-DOCKER = docker
+COMPOSE = sudo docker compose
+DOCKER = sudo docker
 WEB_VOLUME = web
 DB_VOLUME = database
 
@@ -41,7 +41,7 @@ DB_VOLUME = database
 all: build
 
 build: add_volumes
-	@echo $(CURSIVE)$(GRAY)"- Building Inception project..." $(NC)
+# 	@echo $(CURSIVE)$(GRAY)"- Building Inception project..." $(NC)
 	$(COMPOSE) -f $(DCF) build
 
 up: add_host
