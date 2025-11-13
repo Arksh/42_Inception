@@ -1,0 +1,70 @@
+services:
+  nginx:
+    build: ./requirements/nginx/.
+    container_name: nginx
+    environment:
+      - DOMAIN=${DOMAIN}
+      - PHP_UPSTREAM=wh-php
+    ports:
+      - "443:443"
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      - wordpress
+      - maria-db
+    networks:
+      inception:
+    env_file: .env
+    restart: always
+
+  wordpress:
+    build: ./requirements/wordpress/.
+    container_name: wp-php
+    environment:
+      - WORDPRESS_BD_HOST=${HOST}:3306
+      - WORDPRESS_BD_NAME=${DATABASE}
+      - WORDPRESS_BD_USER=${USER_NAME}
+      - WORDPRESS_EMAIL=${USER_EMAIL}
+      - WORDPRESS_BD_ADMIN_USER=${ADMIN_USER}
+      - WORDPRESS_BD_ADMIN_EMAIL=${ADMIN_EMAIL}
+      - WORDPRESS_SITE_URL=https://${DOMAIN}
+      - WORDPRESS_HOME=https://${DOMAIN}
+      - TITLE=${TITLE}
+    depends_on:
+      - maria-db
+    volumes:
+      - ./web:/var/www/html
+    networks:
+      inception:
+    env_file: .env
+    # secrets:
+    #   - user_password
+    #   - admin_password
+    restart: always
+
+  maria-db:
+    build: requirements/mariadb/.
+    container_name: mariadb
+    environment:
+      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_USER=${USER_NAME}
+    volumes:
+      - ./database:/var/lib/mysql
+    networks:
+      inception:
+    secrets:
+      - root_password
+      - user_password
+    env_file: .env
+    restart: always
+
+networks:
+  inception:
+
+secrets:
+  root_password:
+    file: ./../secrets/root_password.txt
+  user_password:
+    file: ./../secrets/user_password.txt
+  admin_password:
+    file: ./../secrets/admin_password.txt
