@@ -8,7 +8,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./web:/var/www/html
+      - ./data/web:/var/www/html
     depends_on:
       - wordpress
       - maria-db
@@ -33,7 +33,7 @@ services:
     depends_on:
       - maria-db
     volumes:
-      - ./web:/var/www/html
+      - ./data/web:/var/www/html
     networks:
       inception:
     env_file: .env
@@ -49,12 +49,12 @@ services:
       - MYSQL_DATABASE=${DATABASE}
       - MYSQL_USER=${USER_NAME}
     volumes:
-      - ./database:/var/lib/mysql
+      - ./data/database:/var/lib/mysql
     networks:
       inception:
-    secrets:
-      - root_password
-      - user_password
+    # secrets:
+    #   - root_password
+    #   - user_password
     env_file: .env
     restart: always
 
@@ -68,3 +68,4 @@ secrets:
     file: ./../secrets/user_password.txt
   admin_password:
     file: ./../secrets/admin_password.txt
+
