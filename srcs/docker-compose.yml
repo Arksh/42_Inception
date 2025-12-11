@@ -21,7 +21,6 @@ services:
     build: ./requirements/wordpress/.
     container_name: wp-php
     environment:
-      - WORDPRESS_BD_HOST=${HOST}:3306
       - WORDPRESS_BD_NAME=${DATABASE}
       - WORDPRESS_BD_USER=${USER_NAME}
       - WORDPRESS_EMAIL=${USER_EMAIL}

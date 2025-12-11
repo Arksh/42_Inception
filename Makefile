@@ -111,7 +111,7 @@ rm_volumes:
 
 add_host:
 	@echo "Adding host to /etc/hosts..."
-	@grep -qxF "127.0.0.1 $(DOMAIN)" /etc/hosts || echo "127.0.0.1 $(DOMAIN)" | sudo tee -a /etc/hosts
+	@grep -qxF "127.0.0.1 cagonzal.42.fr" /etc/hosts || echo "127.0.0.1 cagonzal.42.fr" | sudo tee -a /etc/hosts
 
 remove_host:
 	@echo "Removing host from /etc/hosts..."

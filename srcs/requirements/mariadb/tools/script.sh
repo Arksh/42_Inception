@@ -4,7 +4,7 @@ if [ -f /run/secrets/root_password ]; then
 fi
 
 if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
-	MYSQL_ROOT_PASSWORD="root_password"
+	MYSQL_ROOT_PASSWORD="root"
 fi
 
 if [ -f /run/secrets/user_password ]; then
@@ -12,7 +12,7 @@ if [ -f /run/secrets/user_password ]; then
 fi
 
 if [ -z "$MYSQL_PASSWORD" ]; then
-	MYSQL_PASSWORD="userpassword"
+	MYSQL_PASSWORD="user"
 fi
 
 sed -i "s/MYSQL_DATABASE/${MYSQL_DATABASE}/g" /etc/mysql/init.sql
