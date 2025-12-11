@@ -30,6 +30,8 @@ services:
       - WORDPRESS_SITE_URL=https://${DOMAIN}
       - WORDPRESS_HOME=https://${DOMAIN}
       - TITLE=${TITLE}
+      - USER_PASSWORD=${USER_PASSWORD}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     depends_on:
       - maria-db
     volumes:
@@ -48,6 +50,8 @@ services:
     environment:
       - MYSQL_DATABASE=${DATABASE}
       - MYSQL_USER=${USER_NAME}
+      - USER_PASSWORD=${USER_PASSWORD}
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - ./data/database:/var/lib/mysql
     networks:

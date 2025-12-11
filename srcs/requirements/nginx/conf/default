@@ -37,19 +37,19 @@
 # HTTPS server block
 server {
 
-	listen 443 ssl http2 default_server; 											# SSL configuration
-	listen [::]:443 ssl http2 default_server;										# SSL configuration
+	listen 443 ssl http2 default_server; 		# SSL configuration
+	listen [::]:443 ssl http2 default_server;	# SSL configuration
 	server_name cagonzal.42.fr; 				# Replace with your domain name
 
-	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt; 		# Replace with your SSL certificate path
-	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;	# Replace with your SSL certificate key path
-	ssl_protocols TLSv1.2 TLSv1.3;	 							# Enable TLS protocols
-	ssl_prefer_server_ciphers on; 								# Prefer server ciphers
+	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+	ssl_protocols TLSv1.2 TLSv1.3;
+	ssl_prefer_server_ciphers on;
 	
 	root /var/www/html; 							# Document root
 
 	# Add index.php to the list if you are using PHP
-	index index.html index.php index.htm index.nginx-debian.html; 	# Index files
+	index index.php index.html index.htm index.nginx-debian.html; 	# Index files
 
 
 	location / {
